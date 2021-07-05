@@ -17,7 +17,7 @@ db.connect(process.env.DATABASE_URL!, {
 db.connection.on("error", (err) => console.error(err));
 db.connection.once("open", () => console.log("Connected to Database"));
 
-app.use("/random", sentenceRoute);
+app.use("/sentence", sentenceRoute);
 
 app.listen(3000, () => {
   console.log("Server is Running");
