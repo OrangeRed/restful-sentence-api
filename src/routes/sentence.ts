@@ -12,19 +12,14 @@ router.get("/jp/:word", (req, res) => {
   res.send(`Here's a sentence with ${req.params.word}`);
 });
 
-//Add sentence with jp word
-router.post("/jp/:word", (req, res) => {
-  res.send(`Added a sentenced with ${req.params.word}`);
-});
-
 //Search sentence with en word
 router.get("/en/:word", (req, res) => {
   res.send(`Here's a sentence with ${req.params.word}`);
 });
 
-//Add sentence with en word
-router.post("/en/:word", (req, res) => {
-  res.send(`Added a sentenced with ${req.params.word}`);
+//Add sentence with sentence
+router.post("/:sentence", (req, res) => {
+  res.send(`Created the following sentence: ${req.params.word}`);
 });
 
 //Update sentence with id
