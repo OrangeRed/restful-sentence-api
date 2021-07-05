@@ -19,7 +19,7 @@ router.get("/en/:word", (req, res) => {
 
 //Add sentence with sentence
 router.post("/:sentence", (req, res) => {
-  res.send(`Created the following sentence: ${req.params.word}`);
+  res.send(`Created the following sentence: ${req.params.sentence}`);
 });
 
 //Update sentence with id
