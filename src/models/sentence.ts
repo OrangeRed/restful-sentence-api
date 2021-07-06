@@ -1,6 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const sentenceSchema = new mongoose.Schema({
+interface Sentence {
+  source: String;
+  eng: String;
+  jap: String;
+  date: Date;
+}
+
+const sentenceSchema = new Schema({
   source: {
     type: String,
     required: true,
@@ -19,3 +26,5 @@ const sentenceSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+export default mongoose.model<Sentence>("Sentence", sentenceSchema);

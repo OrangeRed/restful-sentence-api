@@ -1,10 +1,20 @@
 import express from "express";
+import Sentence from "../models/sentence";
 
 const router = express.Router();
 
 // Get random sentence
 router.get("/", (req, res) => {
-  res.send("Got a sentence");
+  Sentence.find()
+    .then((results) => {
+      res.status(200).json({ sentences: results });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err.message,
+        error: err,
+      });
+    });
 });
 
 //Search sentence with jp word
@@ -17,19 +27,49 @@ router.get("/en/:word", (req, res) => {
   res.send(`Here's a sentence with ${req.params.word}`);
 });
 
-//Add sentence with sentence
-router.post("/:sentence", (req, res) => {
-  res.send(`Created the following sentence: ${req.params.sentence}`);
+//Add sentence
+router.post("/", (req, res) => {
+  const sentence = new Sentence({
+    source: req.body.source,
+    eng: req.body.eng,
+    jap: req.body.jap,
+  });
+  sentence
+    .save()
+    .then((result) => {
+      res.status(200).json({ result });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
 });
 
-//Update sentence with id
-router.patch("/:id", (req, res) => {
-  res.send(`Updated the sentence with ${req.params.id}`);
+//Update sentence with given id
+router.patch("/", (req, res) => {
+  const commands = { jap: req.body.jap, eng: req.body.eng };
+
+  Sentence.updateOne(
+    { _id: req.body.id },
+    { $set: commands },
+    { omitUndefined: true }
+  )
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
 });
 
-//Delete sentence with id
-router.delete("/:id", (req, res) => {
-  res.send(`Deleted the sentence with ${req.params.id}`);
+//Delete sentence with given id
+router.delete("/", (req, res) => {
+  Sentence.deleteOne({ _id: req.body.id })
+    .then(() => {
+      res.status(200).json({ message: `sentence ${req.body.id} deleted` });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
 });
 
 export default router;
