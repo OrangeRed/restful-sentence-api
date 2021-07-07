@@ -2,8 +2,8 @@ import mongoose, { Schema } from "mongoose";
 
 interface Sentence {
   source: String;
-  eng: String;
-  jap: String;
+  eng: String | RegExp;
+  jap: String | RegExp;
   date: Date;
 }
 
