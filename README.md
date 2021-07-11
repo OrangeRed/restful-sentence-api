@@ -90,9 +90,11 @@ Response
 ### Upload Sentence to Database
 
 - `POST /post`
-- **source**: _string_&emsp;<span style="color: lightblue">required</span>
-- **eng**: _string_&emsp;<span style="color: lightblue">required</span>
-- **jap**: _string_&emsp;<span style="color: lightblue">required</span>
+- | Name   | Type   |            |
+  | ------ | ------ | ---------- |
+  | source | String | _required_ |
+  | eng    | String | _required_ |
+  | jap    | String | _required_ |
 
 Example
 
@@ -127,14 +129,16 @@ Response
 ### Update Sentence in Database
 
 - `PATCH /patch`
-- **id**: _string_&emsp;<span style="color: lightblue">required</span>
-- **eng**: _string_&emsp;<span style="color: PaleGoldenRod">optional</span>
-- **jap**: _string_&emsp;<span style="color: PaleGoldenRod">optional</span>
+- | Name | Type   |            |
+  | ---- | ------ | ---------- |
+  | id   | String | _required_ |
+  | eng  | String | _optional_ |
+  | jap  | String | _optional_ |
 
 Example
 
 ```http
-POST https://localhost:3000/patch
+PATCH https://localhost:3000/patch
 Content-Type: application/json
 
 {
@@ -155,12 +159,14 @@ Entry 60ea5095e8624d16a47a78c5 successfully patched
 ### Delete Sentence in Database
 
 - `DELETE /delete`
-- **id**: _string_&emsp;<span style="color: lightblue">required</span>
+- | Name | Type   |            |
+  | ---- | ------ | ---------- |
+  | id   | String | _required_ |
 
 Example
 
 ```http
-POST https://localhost:3000/delete
+DELETE https://localhost:3000/delete
 Content-Type: application/json
 
 {
